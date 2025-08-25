@@ -7,10 +7,12 @@ import torch
 print("✅ GPU disponible:", torch.cuda.is_available())
 
 # Cargar el modelo YOLO personalizado
-model = YOLO("Entrenamiento/best.pt")
+model = YOLO("best.pt")
 
-# Iniciar cámara
-cap = cv2.VideoCapture(0)
+
+# Elegir índice de cámara
+cam_index = int(input("Ingresa el número de cámara (0=PC, 1=móvil, etc): "))
+cap = cv2.VideoCapture(cam_index)
 
 # Configurar resolución y FPS
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
@@ -32,8 +34,30 @@ while cap.isOpened():
     # Inferencia YOLO
     results = model(frame)
 
+
+    # Etiquetas válidas de billetes colombianos
+    etiquetas_col = {"1000", "2000", "5000", "10000", "20000", "50000", "100000"}
+    mensajes = []
+
+    # Procesar resultados
+    for box in results[0].boxes:
+        clase_idx = int(box.cls[0])
+        clase_nombre = results[0].names[clase_idx]
+        if clase_nombre in etiquetas_col:
+            mensaje = f"Billete colombiano: {clase_nombre}"
+        else:
+            mensaje = f"Billete de otra moneda o desconocido: {clase_nombre}"
+        mensajes.append(mensaje)
+
     # Dibujar resultados
     annotated_frame = results[0].plot()
+
+    # Mostrar mensajes en la ventana del video
+    y0 = 60
+    for i, mensaje in enumerate(mensajes):
+        y = y0 + i * 30
+        cv2.putText(annotated_frame, mensaje, (10, y),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
     # Calcular y mostrar FPS
     end = time.time()
