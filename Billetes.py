@@ -31,9 +31,8 @@ while cap.isOpened():
     # Medir tiempo de inferencia
     start = time.time()
 
-    # Inferencia YOLO
-    results = model(frame)
-
+    # Infer    results = model(frame, conf=0.5, verbose=False) # Añadido conf=0.5 y verbose=False
+    results = model(frame, conf=0.6)  # Puedes probar valores como 0.5, 0.6, 0.7
 
     # Etiquetas válidas de billetes colombianos
     etiquetas_col = {"1000", "2000", "5000", "10000", "20000", "50000", "100000"}
