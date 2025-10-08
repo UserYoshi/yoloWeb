@@ -309,7 +309,7 @@ MIT License - ve [LICENSE](LICENSE) para más detalles.
 
 ## 👨‍💻 Autor
 
-Desarrollado con ❤️ usando FastAPI + React + YOLO
+Desarrollado usando FastAPI + React + YOLO
 
 -Juan Camilo Parra Ortiz 
 -Jesus Alberto Gutiérrez Rincón 
