@@ -311,6 +311,10 @@ MIT License - ve [LICENSE](LICENSE) para más detalles.
 
 Desarrollado con ❤️ usando FastAPI + React + YOLO
 
+-Juan Camilo Parra Ortiz 
+-Jesus Alberto Gutiérrez Rincón 
+-Fabian David Solano Velandia 
+
 ## 🙏 Agradecimientos
 
 - [Ultralytics YOLO](https://github.com/ultralytics/ultralytics)
